@@ -211,7 +211,7 @@ function Snake(x, y) {
     this.dy = 0;
     this.radians = Math.random() * 4;
 
-    this.radius = 1;
+    this.radius = game_settings["input-snake-size"];
 
     this.speedy = 0;
 

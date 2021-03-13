@@ -1,2 +1,2 @@
 // new comment
-function game_obj() {
+function game_obj(game_settings) {

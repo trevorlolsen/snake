@@ -1,5 +1,8 @@
 function start_game() {
 
+    startDate = new Date();
+
+
     anc_x = (board_sqr_length / 2) * square_size -WIDTH/2 +square_size/2;
     anc_y = (board_sqr_length / 2) * square_size -HEIGHT/2 +square_size/2;
 

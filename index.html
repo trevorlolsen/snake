@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Ball Shooting Bee</title>
+    <title>Snakes</title>
     <link rel="stylesheet" href="css/spectre.min.css">
     <link rel="stylesheet" href="css/custom.css">
     <style>
@@ -64,10 +64,68 @@
         <div class="modal_custom-content">
 
             <p>You Won</p>
-            <button class="btn" id="home_btn2">Home</button>
-            <button class="btn" id="upgrade_btn2"><span id="total_upgrade_points_span3">Upgrade</span></button>
-            <button class="btn" id="play_again2">Play Again</button>
-            <button class="btn" id="next_level">Next Level</button>
+            <div ><span id="won_points"></span> Points in <span id="won_seconds"></span> Seconds</div>
+            <hr>
+            <button class="btn btn-lg" id="home_btn">Home</button>
+            <button class="btn btn-lg" id="play_again">Play Again</button>
+            <button class="btn btn-lg" id="next_level">Next Level</button>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="myStartMenu" class="start_menu">
+
+        <!-- Modal content -->
+        <div class="modal_custom-content">
+
+            <p>Start</p>
+            <hr>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-3 col-sm-12">
+                        <label class="form-label" for="input-food">Food</label>
+                    </div>
+                    <div class="col-9 col-sm-12">
+                        <input class="form-input" type="number" id="input-food" value="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-3 col-sm-12">
+                        <label class="form-label" for="input-poison">Poison</label>
+                    </div>
+                    <div class="col-9 col-sm-12">
+                        <input class="form-input" type="number" id="input-poison" value="0">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-3 col-sm-12">
+                        <label class="form-label" for="input-squares">Squares</label>
+                    </div>
+                    <div class="col-9 col-sm-12">
+                        <input class="form-input" type="number" id="input-squares" value="2">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-3 col-sm-12">
+                        <label class="form-label" for="input-snake-size">Snake Size</label>
+                    </div>
+                    <div class="col-9 col-sm-12">
+                        <input class="form-input" type="number" id="input-snake-size" value="1">
+                    </div>
+                </div>
+                <!-- form structure -->
+            </form>
+
+
+            <hr>
+            <button class="btn btn-lg" id="start_game">Play</button>
 
         </div>
 
@@ -77,8 +135,103 @@
 
     <script src="index.js"></script>
     <script type="text/javascript">
-        var game = game_obj();
-        game.start_game();
+        var wrapper = document.getElementById("wrapper");
+        wrapper.style.display = "none";
+
+        var game = {};
+        //game.start_game();
+
+        if (localStorage.auto_start) {
+
+        } else {
+            localStorage.auto_start = "false"
+        }
+
+
+        if (localStorage.game_settings) {
+            var game_settings = JSON.parse(localStorage.game_settings);
+        } else {
+            var game_settings = {};
+        }
+
+        if ("input-food" in game_settings) {
+            document.getElementById("input-food").value = game_settings["input-food"];
+        }
+
+        if ("input-poison" in game_settings) {
+            document.getElementById("input-poison").value = game_settings["input-poison"];
+        }
+
+        if ("input-squares" in game_settings) {
+            document.getElementById("input-squares").value = game_settings["input-squares"];
+        }
+
+        if ("input-snake-size" in game_settings) {
+            document.getElementById("input-snake-size").value = game_settings["input-snake-size"];
+        }
+
+
+        localStorage.game_settings = JSON.stringify(game_settings);
+
+        var start_game_function = function () {
+            wrapper.style.display = "block";
+            localStorage.auto_start = "false";
+
+            var start_food = parseInt(document.getElementById("input-food").value);
+            var start_poison = parseInt(document.getElementById("input-poison").value);
+            var start_squares = parseInt(document.getElementById("input-squares").value);
+            var start_snake_size = parseInt(document.getElementById("input-snake-size").value);
+
+            game_settings = { "input-food": start_food, "input-poison": start_poison, "input-squares": start_squares,"input-snake-size": start_snake_size};
+            localStorage.game_settings = JSON.stringify(game_settings);
+
+            game = game_obj(game_settings);
+            game.start_game();
+
+            var myStartMenu = document.getElementById("myStartMenu");
+            myStartMenu.style.display = "none";
+        }
+
+        if (localStorage.auto_start === "false") {
+            document.getElementById("start_game").addEventListener("click", function (e) {
+
+                start_game_function();
+            },
+                false
+            );
+        } else {
+            start_game_function();
+        }
+
+
+
+
+
+        document.getElementById("home_btn").addEventListener("click", function (e) {
+            localStorage.auto_start = "false";
+            location.reload();
+        },
+            false
+        );
+
+        document.getElementById("play_again").addEventListener("click", function (e) {
+            localStorage.auto_start = "true";
+            location.reload();
+        },
+            false
+        );
+
+
+        document.getElementById("next_level").addEventListener("click", function (e) {
+            game_settings = JSON.parse(localStorage.game_settings);
+            game_settings["input-food"] += 1;
+            localStorage.game_settings = JSON.stringify(game_settings);
+
+            localStorage.auto_start = "true";
+            location.reload();
+        },
+            false
+        );
     </script>
 </body>
 

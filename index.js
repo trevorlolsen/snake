@@ -1,14 +1,16 @@
 // new comment
-function game_obj() {
+function game_obj(game_settings) {
 var snakes = [];
 var food = [];
 var poison=[];
 
 var score=0;
+var seconds =0;
 
 
 
 
+var startDate=0;
 
 
 
@@ -40,7 +42,7 @@ var mouse_y=0;
 
 
 
-var board_sqr_length = 10;
+var board_sqr_length = game_settings["input-squares"];
 var square_size = 100;
 var board = new Array(board_sqr_length);
 for (var i = 0; i < board_sqr_length; i++) {
@@ -372,7 +374,7 @@ function Snake(x, y) {
     this.dy = 0;
     this.radians = Math.random() * 4;
 
-    this.radius = 1;
+    this.radius = game_settings["input-snake-size"];
 
     this.speedy = 0;
 
@@ -644,7 +646,7 @@ function updateGameArea() {
 
     manage_snakes();
 
-    
+
     var ctx = myGameArea.context;
 
 
@@ -656,17 +658,26 @@ function updateGameArea() {
     ctx.fillText(poison.length, 10 + 1, 50 - 1);
 
     ctx.font = "18px Arial";
-    ctx.fillStyle = '#00FF00';
+    ctx.fillStyle = '#FFD700';
     ctx.fillText(score, 10 + 1, 70 - 1);
 
- 
+    // Do your operations
+    var endDate = new Date();
+    seconds = Math.floor((endDate.getTime() - startDate.getTime()) / 1000);
 
-    if (game_over1 === false) {
-        // bee.newPos();
+    ctx.font = "18px Arial";
+    ctx.fillStyle = '#009dFF';
+    ctx.fillText(seconds, 10 + 1, 90 - 1);
+
+
+
+    if (food.length <= 0) {
+
+        won_game_function();
     }
 
     // manage_balls();
- 
+
     manage_menus();
 
 
@@ -685,6 +696,18 @@ function pause_game_function() {
     }
 }
 
+function won_game_function() {
+    if (pause_game_draw === false) {
+        document.getElementById("won_points").innerHTML= score;
+        document.getElementById("won_seconds").innerHTML= seconds;
+
+        myGameArea.stop();
+        myGameArea.clear();
+        var modal = document.getElementById("myModalWon");
+        modal.style.display = "block";
+    }
+}
+
 
 function manage_snakes() {
     for (var i = snakes.length - 1; i >= 0; i--) {
@@ -697,7 +720,7 @@ function manage_snakes() {
 
 function manage_food() {
 
-    while (food.length < 100 && all_food===false) {
+    while (food.length < game_settings["input-food"] && all_food===false) {
 
         var rad = Math.random() * 4 + 1;
         var d = Math.random() * 1000;
@@ -727,7 +750,7 @@ function manage_food() {
 
 function manage_poison() {
 
-    while (poison.length < 50 && all_poison===false) {
+    while (poison.length < game_settings["input-poison"] && all_poison===false) {
 
         var rad = Math.random() * 4 + 1;
         var d = Math.random() * 1000;
@@ -875,6 +898,9 @@ var myGameArea = {
     }
 };
 function start_game() {
+
+    startDate = new Date();
+
 
     anc_x = (board_sqr_length / 2) * square_size -WIDTH/2 +square_size/2;
     anc_y = (board_sqr_length / 2) * square_size -HEIGHT/2 +square_size/2;

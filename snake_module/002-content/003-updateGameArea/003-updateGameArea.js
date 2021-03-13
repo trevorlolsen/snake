@@ -19,7 +19,7 @@ function updateGameArea() {
 
     manage_snakes();
 
-    
+
     var ctx = myGameArea.context;
 
 
@@ -31,17 +31,26 @@ function updateGameArea() {
     ctx.fillText(poison.length, 10 + 1, 50 - 1);
 
     ctx.font = "18px Arial";
-    ctx.fillStyle = '#00FF00';
+    ctx.fillStyle = '#FFD700';
     ctx.fillText(score, 10 + 1, 70 - 1);
 
- 
+    // Do your operations
+    var endDate = new Date();
+    seconds = Math.floor((endDate.getTime() - startDate.getTime()) / 1000);
 
-    if (game_over1 === false) {
-        // bee.newPos();
+    ctx.font = "18px Arial";
+    ctx.fillStyle = '#009dFF';
+    ctx.fillText(seconds, 10 + 1, 90 - 1);
+
+
+
+    if (food.length <= 0) {
+
+        won_game_function();
     }
 
     // manage_balls();
- 
+
     manage_menus();
 
 

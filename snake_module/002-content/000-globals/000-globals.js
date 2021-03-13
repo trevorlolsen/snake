@@ -3,10 +3,12 @@ var food = [];
 var poison=[];
 
 var score=0;
+var seconds =0;
 
 
 
 
+var startDate=0;
 
 
 
@@ -38,7 +40,7 @@ var mouse_y=0;
 
 
 
-var board_sqr_length = 10;
+var board_sqr_length = game_settings["input-squares"];
 var square_size = 100;
 var board = new Array(board_sqr_length);
 for (var i = 0; i < board_sqr_length; i++) {

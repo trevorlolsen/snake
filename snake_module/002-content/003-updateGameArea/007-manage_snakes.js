@@ -11,7 +11,7 @@ function manage_snakes() {
 
 function manage_food() {
 
-    while (food.length < 100 && all_food===false) {
+    while (food.length < game_settings["input-food"] && all_food===false) {
 
         var rad = Math.random() * 4 + 1;
         var d = Math.random() * 1000;
@@ -41,7 +41,7 @@ function manage_food() {
 
 function manage_poison() {
 
-    while (poison.length < 50 && all_poison===false) {
+    while (poison.length < game_settings["input-poison"] && all_poison===false) {
 
         var rad = Math.random() * 4 + 1;
         var d = Math.random() * 1000;
