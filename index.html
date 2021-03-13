@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Ball Shooting Bee</title>
+    <link rel="stylesheet" href="css/spectre.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        body {
+            font-family: Impact, Charcoal, sans-serif;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div class="content_custom">
+
+            <canvas id="game_canvas"></canvas>
+        </div>
+    </div>
+
+    <div id="myModalPaused" class="modal_custom">
+
+        <!-- Modal content -->
+        <div class="modal_custom-content">
+
+            <p>Paused</p>
+            <button class="btn" id="home_btn3">Home</button>
+            <button class="btn" id="upgrade_btn3"><span id="total_upgrade_points_span1">Upgrade</span></button>
+            <button class="btn" id="play_again3">Restart</button>
+            <button class="btn" id="resume_btn">Resume</button>
+
+        </div>
+
+    </div>
+
+
+    <div id="myModal" class="modal_custom">
+
+        <!-- Modal content -->
+        <div class="modal_custom-content">
+
+            <p>You Lost</p>
+            <button class="btn" id="home_btn1">Home</button>
+            <button class="btn" id="upgrade_btn1"><span id="total_upgrade_points_span2">Upgrade</span></button>
+            <button class="btn" id="play_again1">Play Again</button>
+
+        </div>
+
+    </div>
+
+    <div id="myModalWon" class="modal_custom">
+
+        <!-- Modal content -->
+        <div class="modal_custom-content">
+
+            <p>You Won</p>
+            <button class="btn" id="home_btn2">Home</button>
+            <button class="btn" id="upgrade_btn2"><span id="total_upgrade_points_span3">Upgrade</span></button>
+            <button class="btn" id="play_again2">Play Again</button>
+            <button class="btn" id="next_level">Next Level</button>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="index.js"></script>
+    <script type="text/javascript">
+        var game = game_obj();
+        game.start_game();
+    </script>
+</body>
+
+</html>
