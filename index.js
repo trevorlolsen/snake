@@ -957,39 +957,39 @@ function press_bee(touch_event) {
 
 
 
-document.addEventListener('keydown', moveBee);
+// document.addEventListener('keydown', moveBee);
 
-function moveBee(e) {
-    if (e.code == 'ArrowRight') {
-        snake_angle += 0.1;
-        //anc_x += 10;
-    } else if (e.code == 'ArrowLeft') {
-        //anc_x -= 10;
-        snake_angle -= 0.1;
-    } else if (e.code =='Space' || e.code == 'ArrowUp') {
-        anc_y -= 10;
+// function moveBee(e) {
+//     if (e.code == 'ArrowRight') {
+//         snake_angle += 0.1;
+//         //anc_x += 10;
+//     } else if (e.code == 'ArrowLeft') {
+//         //anc_x -= 10;
+//         snake_angle -= 0.1;
+//     } else if (e.code =='Space' || e.code == 'ArrowUp') {
+//         anc_y -= 10;
 
-    }else if (e.code =='ControlLeft' ||e.code == 'ArrowDown') {
-        anc_y += 10;
+//     }else if (e.code =='ControlLeft' ||e.code == 'ArrowDown') {
+//         anc_y += 10;
 
-    } else if (e.code == 'Enter') {
-        console.log(e.code);
-    }
+//     } else if (e.code == 'Enter') {
+//         console.log(e.code);
+//     }
 
-}
+// }
 
-document.addEventListener('keyup', stopBee);
+// document.addEventListener('keyup', stopBee);
 
-function stopBee(e) {
-    if (e.code == 'ArrowRight') {
-        console.log(e.code);
-    } else if (e.code == 'ArrowLeft') {
-        console.log(e.code);
-    } else if (e.code == 'Enter') {
-        console.log(e.code);
-    }
+// function stopBee(e) {
+//     if (e.code == 'ArrowRight') {
+//         console.log(e.code);
+//     } else if (e.code == 'ArrowLeft') {
+//         console.log(e.code);
+//     } else if (e.code == 'Enter') {
+//         console.log(e.code);
+//     }
 
-}
+// }
 
 
 document.addEventListener('mousemove', function (e) {
@@ -1003,7 +1003,7 @@ document.addEventListener('mousemove', function (e) {
     click_event_function(my_touch);
 
 
-    e.preventDefault();
+    //e.preventDefault();
 },
 false
 );
@@ -1060,9 +1060,8 @@ function getTouchChangedPos(canvasDom, touchEvent) {
 document.addEventListener('touchstart', function (e) {
         var my_touch = getTouchPos(myGameArea.canvas, e);
         click_event_function(my_touch);
-        console.log("start");
-        console.log(my_touch);
-        e.preventDefault();
+    
+        //e.preventDefault();
     },
     false
 );
@@ -1070,29 +1069,28 @@ document.addEventListener('touchstart', function (e) {
 document.addEventListener('touchmove', function (e) {
     var my_touch = getTouchPos(myGameArea.canvas, e);
         click_event_function(my_touch);
-        console.log("move");
-        console.log(my_touch);
-    e.preventDefault(); // prevent scrolling when inside DIV
+   
+    //e.preventDefault(); // prevent scrolling when inside DIV
 }, false);
 
-document.addEventListener('touchend', function (e) {
+// document.addEventListener('touchend', function (e) {
 
-    // if (e.touches.length === 0 || e.changedTouches.length === 0) {
+//     // if (e.touches.length === 0 || e.changedTouches.length === 0) {
 
-    //     console.log("stopped 1");
-    // } else {
+//     //     console.log("stopped 1");
+//     // } else {
 
-    //     var my_touch = getTouchChangedPos(myGameArea.canvas, e);
-    //     for (var i = 0; i < my_touch.length; i++) {
-    //         click_event_function(my_touch);
-    //         console.log("end");
-    //         console.log(my_touch);
-    //     }
-    // }
-    e.preventDefault();
+//     //     var my_touch = getTouchChangedPos(myGameArea.canvas, e);
+//     //     for (var i = 0; i < my_touch.length; i++) {
+//     //         click_event_function(my_touch);
+//     //         console.log("end");
+//     //         console.log(my_touch);
+//     //     }
+//     // }
+//     e.preventDefault();
 
 
-}, false);
+// }, false);
 
 
 
