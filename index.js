@@ -1020,7 +1020,7 @@ document.addEventListener("click", function (e) {
         click_event_function(my_touch);
 
 
-        e.preventDefault();
+        //e.preventDefault();
     },
     false
 );
