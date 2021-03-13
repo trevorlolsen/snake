@@ -64,7 +64,7 @@
         <div class="modal_custom-content">
 
             <p>You Won</p>
-            <div ><span id="won_points"></span> Points in <span id="won_seconds"></span> Seconds</div>
+            <div><span id="won_points"></span> Points in <span id="won_seconds"></span> Seconds</div>
             <hr>
             <button class="btn btn-lg" id="home_btn">Home</button>
             <button class="btn btn-lg" id="play_again">Play Again</button>
@@ -173,34 +173,43 @@
 
         localStorage.game_settings = JSON.stringify(game_settings);
 
+        var min_max = function (x,minx,maxx) {
+            return Math.min(Math.max(x,minx),maxx);
+
+
+        }
+
         var start_game_function = function () {
             wrapper.style.display = "block";
             localStorage.auto_start = "false";
 
-            var start_food = parseInt(document.getElementById("input-food").value);
-            var start_poison = parseInt(document.getElementById("input-poison").value);
-            var start_squares = parseInt(document.getElementById("input-squares").value);
-            var start_snake_size = parseInt(document.getElementById("input-snake-size").value);
+            var start_food = min_max(parseInt(document.getElementById("input-food").value),1,300);
+            var start_poison = min_max(parseInt(document.getElementById("input-poison").value),0,300);
+            var start_squares = min_max(parseInt(document.getElementById("input-squares").value),1,100);
+            var start_snake_size = min_max(parseInt(document.getElementById("input-snake-size").value),1,100);
 
-            game_settings = { "input-food": start_food, "input-poison": start_poison, "input-squares": start_squares,"input-snake-size": start_snake_size};
+            game_settings = { "input-food": start_food, "input-poison": start_poison, "input-squares": start_squares, "input-snake-size": start_snake_size };
             localStorage.game_settings = JSON.stringify(game_settings);
 
-            game = game_obj(game_settings);
-            game.start_game();
 
-            var myStartMenu = document.getElementById("myStartMenu");
-            myStartMenu.style.display = "none";
         }
 
         if (localStorage.auto_start === "false") {
             document.getElementById("start_game").addEventListener("click", function (e) {
 
                 start_game_function();
+                localStorage.auto_start = "true";
+                location.reload();
             },
                 false
             );
         } else {
             start_game_function();
+            game = game_obj(game_settings);
+            game.start_game();
+
+            var myStartMenu = document.getElementById("myStartMenu");
+            myStartMenu.style.display = "none";
         }
 
 
