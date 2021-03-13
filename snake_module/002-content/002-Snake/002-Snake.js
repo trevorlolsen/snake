@@ -369,7 +369,6 @@ function Snake(x, y) {
                 }
 
                 
-
                 poison.splice(i, 1);
                 this.radius -= .4;
                 this.d -= .1;
